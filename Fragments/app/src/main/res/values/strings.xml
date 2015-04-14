@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Fragments</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_text">Dank Meme Bro</string>
+    <string name="top_meme_text">top</string>
+    <string name="bottom_meme_text">bottom</string>
+</resources>

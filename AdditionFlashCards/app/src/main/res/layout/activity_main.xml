@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_number"
+            android:textSize="75dp"
+            android:textColorLink="#666666"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/addition_symbol"
+            android:layout_toEndOf="@+id/addition_symbol"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_number"
+            android:textSize="75dp"
+            android:textColorLink="#666666"
+            android:layout_below="@+id/top_number"
+            android:layout_alignLeft="@+id/top_number"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/addition_symbol"
+            android:textSize="75dp"
+            android:layout_below="@+id/top_number"
+            android:layout_marginTop="-90dp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/answer"
+            android:textSize="25dp"
+            android:layout_below="@+id/submit_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="53dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check Answer!"
+            android:id="@+id/submit_button"
+            android:onClick="processAnswer"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/answer"
+            android:layout_alignEnd="@+id/answer"
+            android:layout_marginBottom="51dp" />
+    </LinearLayout>
+
+</RelativeLayout>

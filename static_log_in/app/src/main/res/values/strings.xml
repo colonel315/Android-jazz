@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">second_app</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="sign_in_title">Sign in</string>
+    <string name="log_in_button">Log in</string>
+</resources>

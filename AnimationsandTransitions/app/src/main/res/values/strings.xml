@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Animations and Transitions</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button">Tap Screen</string>
+    <string name="restart">Restart</string>
+</resources>
