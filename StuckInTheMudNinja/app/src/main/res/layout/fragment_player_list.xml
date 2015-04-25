@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:background="#ffe6e6e6"
+             android:id="@+id/playerList"
+             tools:context="ninjacoder.stuckinthemud.PlayerList">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/player_subheading"
+        android:textSize="25sp"
+        android:id="@+id/playerSubheading"
+        android:textColor="#0106d1"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"/>
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/player_column_1"
+            android:textColor="#5c015e"
+            android:layout_marginRight="20dp"
+            android:id="@+id/playerColumn1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/player_column_2"
+            android:textColor="#5c015e"
+            android:layout_marginRight="20dp"
+            android:id="@+id/playerColumn2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/player_column_3"
+            android:textColor="#5c015e"
+            android:layout_marginRight="20dp"
+            android:id="@+id/playerColumn3"/>
+    </LinearLayout>
+
+</LinearLayout>

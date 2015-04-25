@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Stuck In The Mud</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_player">AddPlayerActivity</string>
+    <string name="title_activity_play_game">PlayGameActivity</string>
+    <string name="player_subheading">Players</string>
+    <string name="title">Stuck In The Mud</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_player_list">player_list</string>
+    <string name="player_name">Player Name</string>
+    <string name="add_new_player">Add New Player</string>
+    <string name="add_new_player_button">Add New Player</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="play_button">Play!</string>
+    <string name="add_player_button">Add Player</string>
+    <string name="roll_button">Roll Them Bad Boys</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings">Settings</string>
+    <string name="player_column_1"></string>
+    <string name="player_column_2"></string>
+    <string name="player_column_3"></string>
+    <string name="main_menu">Back to Main Menu</string>
+    <string name="display_player_name"></string>
+    <string name="rotation"></string>
+    <string name="player_score"></string>
+    <string name="highest_scoring_player"></string>
+    <string name="clear_player">Clear Players</string>
+</resources>

@@ -38,6 +38,8 @@ public class AddPlayerActivity extends ActionBarActivity {
 
 	@Override
 	public void onStart() {
+		super.onStart();
+
 		//Retrieve the Game instance from the bundle passed to this
 		//activity from MainActivity.
 		this.bundle = getIntent().getExtras();
