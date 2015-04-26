@@ -19,7 +19,7 @@
         android:textColor="#fefefe"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_below="@+id/rotation"
+        android:layout_below="@+id/round"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="182dp"/>
 
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/rotation"
+        android:id="@+id/round"
         android:onClick="goToMainMenu"
         android:textColor="#5c015e"
         android:text="@string/rotation"
@@ -68,7 +68,7 @@
         android:id="@+id/score"
         android:layout_alignParentStart="true"
         android:textColor="#5c015e"
-        android:layout_below="@+id/rotation"
+        android:layout_below="@+id/round"
         android:layout_alignParentLeft="true"/>
 
     <TextView

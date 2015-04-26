@@ -20,31 +20,32 @@ import java.io.Serializable;
 
 
 public class PlayGameActivity extends ActionBarActivity implements Serializable {
-	private Game game;
-	private ImageView diceView[];
-	private TextView playerName;
-	private TextView rotation;
-	private TextView score;
-	private TextView highestScoring;
-	private MediaPlayer bloopSound;
-	private MediaPlayer rollSound;
+	private Game game;  //  keeps the current game instance
+	private ImageView diceView[];   //  stores all the dice views
+	private TextView playerName;    //  prints the players name
+	private TextView round;      //  prints the round number
+	private TextView score;      //  prints out the score
+	private TextView highestScoring;    //  prints out the highest scoring player
+	private MediaPlayer bloopSound; //  will make the bloop sound
+	private MediaPlayer rollSound;  //  will make a rolling sound
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play_game);
 
-		this.getSupportActionBar().hide();
+		this.getSupportActionBar().hide();  //  hide the action bar
 
+		//  initialize these variables
 		this.diceView = new ImageView[5];
 		this.playerName = (TextView)findViewById(R.id.playerName);
-		this.rotation = (TextView)findViewById(R.id.rotation);
+		this.round = (TextView)findViewById(R.id.rotation);
 		this.score = (TextView)findViewById(R.id.score);
 		this.highestScoring = (TextView)findViewById(R.id.highestPlayer);
 		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound);
 		this.rollSound = MediaPlayer.create(this, R.raw.roll_sound);
 
-		this.setDice();
+		this.setDice(); //  set the dice views
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		}
 
 		this.playerName.setText("Player: " + this.game.getPlayersName(this.game.getCurrentPlayer()));
-		this.rotation.setText("Rotation: " + this.game.getRotation());
+		this.round.setText("Round: " + this.game.getRound());
 		this.score.setText("Score: " + this.game.getPlayers(this.game.getCurrentPlayer()).getScore());
 
 		this.setDice();
@@ -92,6 +93,9 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * set the dices corresponding ImageViews
+	 */
 	public void setDice() {
 		//  get the ImageView
 		this.diceView[0] = (ImageView)findViewById(R.id.die1);
@@ -101,6 +105,9 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		this.diceView[4] = (ImageView)findViewById(R.id.die5);
 	}
 
+	/**
+	 * reset the dice to visible
+	 */
 	public void resetDice() {
 		this.diceView[0].setVisibility(View.VISIBLE);
 		this.diceView[1].setVisibility(View.VISIBLE);
@@ -109,10 +116,15 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		this.diceView[4].setVisibility(View.VISIBLE);
 	}
 
+	/**
+	 * roll the dice for results
+	 * @param view
+	 */
 	public void rollDice(View view) {
 		if(this.game.haveSound()) {
 			this.bloopSound.start();
 
+			//  when the bloop sound is done make the rolling sound
 			this.bloopSound.setOnCompletionListener(
 					new MediaPlayer.OnCompletionListener() {
 						@Override
@@ -129,7 +141,7 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		if(this.game.isTurnOver()) {
 			this.game.nextPlayers();
 
-			if(this.game.getRotation() > 5) {
+			if(this.game.getRound() > 5) {  //  game is done
 				Toast.makeText(this,
 						this.game.getHighestScoringPlayer().getPlayerName() +
 								" is the highest scoring player with a score of " +
@@ -151,48 +163,77 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 				this.playerName.setText("Player: " + this.game.getPlayersName(this.game.getCurrentPlayer()));
 				this.score.setText("Score: " + this.game.getPlayers(this.game.getCurrentPlayer()).getScore());
 
-				if(this.game.getRotation() >
-						Integer.parseInt(this.rotation.getText().toString().replaceAll("[\\D]", ""))) {
-					this.rotation.setText("Rotation: " + this.game.getRotation());
+				//  if the current printed out round is less than the actual round number, print out the new round number
+				if(this.game.getRound() >
+						Integer.parseInt(this.round.getText().toString().replaceAll("[\\D]", ""))) {
+					this.round.setText("Round: " + this.game.getRound());
 				}
 			}
 		}
 	}
 
+	/**
+	 * if user is done with game, but wants to keep instance
+	 * @param view -
+	 */
 	public void goToMainMenu(View view) {
 		Intent mainMenu = new Intent(this, MainActivity.class);
 		mainMenu.putExtra("game", (Serializable)this.game);
 		startActivity(mainMenu);
 	}
 
+	/**
+	 * user finished the game
+	 */
 	public void gameFinishMainMenu() {
 		Toast.makeText(this, "Loading new game", Toast.LENGTH_SHORT).show();
 
 		Intent mainMenu = new Intent(this, MainActivity.class);
 
-		this.game.setRotation(1);
+		this.game.setRound(1);
 		this.game.resetScore();
 		mainMenu.putExtra("game", (Serializable)this.game);
 
 		startActivity(mainMenu);
 	}
 
+	/**
+	 * get the ImageView die
+	 * @param index - which die is wanted
+	 * @return  ImageView
+	 */
 	public ImageView getDie(int index) {
 		return this.diceView[index];
 	}
 
+	/**
+	 * get the entire ImageView array
+	 * @return ImageView[]
+	 */
 	public ImageView[] getDiceView() {
 		return this.diceView;
 	}
 
+	/**
+	 * set the dice view
+	 * @param diceView -
+	 */
 	public void setDiceView(ImageView[] diceView) {
 		this.diceView = diceView;
 	}
 
+	/**
+	 * get the highest scoring player
+	 * @return TextView
+	 */
 	public TextView getHighestScoring() {
 		return this.highestScoring;
 	}
 
+	/**
+	 * get the scoreView
+	 * @return TextView
+	 */
 	public TextView getScoreView() {
 		return this.score;
 	}

@@ -14,10 +14,13 @@ import java.io.Serializable;
 
 
 public class MainActivity extends ActionBarActivity {
-	private Game game;
-	private Bundle bundle;
-	private MediaPlayer bloopSound;
+	private Game game;  //  Declaring the object game
+	private Bundle bundle;  //  Declaring the object bundle
+	private MediaPlayer bloopSound; //  Gotta have that bloop sound
 
+	/**
+	 * MainActivity constructor that will initialize bundle to a new bundle.
+	 */
 	public MainActivity() {
 		this.bundle = new Bundle();
 	}
@@ -30,48 +33,43 @@ public class MainActivity extends ActionBarActivity {
 		//hide the action bar
 		this.getSupportActionBar().hide();
 
-		this.game = new Game();
-		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound);
+		this.game = new Game(); //  initialize game to a new game
+		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound); //   initialize the bloop sound
 
-		this.printPlayers();
+		this.printPlayers();    //  print out any players
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
+		//  get any information passed from a previous intent that was serializable
 		Serializable gameContent = getIntent().getSerializableExtra("game");
 
-		if(gameContent != null) {
-			this.game = (Game) gameContent;
+		if(gameContent != null) {   //  make sure the info isn't null
+			this.game = (Game) gameContent; //  set game as that previous information
 		}
 
 
-		ImageView soundIcon = (ImageView)findViewById(R.id.sound);
+		ImageView soundIcon = (ImageView)findViewById(R.id.sound);  //  Get the sound icon
 
-		if(this.game.haveSound()) {
-			soundIcon.setImageResource(R.drawable.sound);
+		if(this.game.haveSound()) { //  if it has sound
+			soundIcon.setImageResource(R.drawable.sound);   //  show this picture
 		}
-		else {
-			soundIcon.setImageResource(R.drawable.no_sound);
+		else {  //  otherwise
+			soundIcon.setImageResource(R.drawable.no_sound);    //  show this picture
 		}
 
-		this.printPlayers();
+		this.printPlayers();    //  print any player names.
 	}
 
 	/**
-	 * Dispatch onPause() to fragments.
+	 * calls that printPlayerList method inside of the PlayerList fragment
 	 */
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		
-	}
-
 	private void printPlayers() {
+		//  get the PlayerList fragment and support it
 		PlayerList playerList = (PlayerList) getSupportFragmentManager().findFragmentById(R.id.playerList);
-		playerList.printPlayerList(this.game);
+		playerList.printPlayerList(this.game);  //  call the printPlayerList method
 	}
 
 	@Override
@@ -96,47 +94,60 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * starts the game activity if user has at least 2 players
+	 * @param view -
+	 */
 	public void playGame(View view) {
-		if(this.game.haveSound()) {
+		if(this.game.haveSound()) { //  if it got sound play it
 			this.bloopSound.start();
 		}
 
-		if(this.game.getPlayerList().size() >= 2) {
-			Intent playGameIntent = new Intent(this, PlayGameActivity.class);
+		if(this.game.getPlayerList().size() >= 2) { //  need at least two players
+			Intent playGameIntent = new Intent(this, PlayGameActivity.class);   //  get the intent
 
-			this.bundle.putSerializable("game", (Serializable)this.game);
-			playGameIntent.putExtras(this.bundle);
+			this.bundle.putSerializable("game", (Serializable)this.game);   //  pass through this.game info
+			playGameIntent.putExtras(this.bundle);  //  put the game info in the intent
 
-			startActivity(playGameIntent);
+			startActivity(playGameIntent);  //  start activity
 		}
 		else {
+			//  print out a message to the user saying they need two players.
 			Toast.makeText(this, "need at least two players", Toast.LENGTH_SHORT).show();
 		}
 	}
 
+
 	public void addNewPlayer(View view) {
-		if(this.game.haveSound()) {
+		if(this.game.haveSound()) { //  play that sound
 			this.bloopSound.start();
 		}
 
+		//  create a new intent that points towards the AddPlayer activity
 		Intent addNewPlayerIntent = new Intent(this, AddPlayerActivity.class);
 
+		//  put the game instance as a serializable in a bundle
 		this.bundle.putSerializable("game", (Serializable)this.game);
-		addNewPlayerIntent.putExtras(this.bundle);
+		addNewPlayerIntent.putExtras(this.bundle);  //  put the bundle inside the intent
 
-		startActivity(addNewPlayerIntent);
+		startActivity(addNewPlayerIntent);  //  start activity AddPlayer
 	}
 
+	/**
+	 * changes the sound icon and turns sound on and off.
+	 * @param view -
+	 */
 	public void sound(View view) {
+		//  get the soundIcon
 		ImageView soundIcon = (ImageView)findViewById(R.id.sound);
 
-		if(this.game.haveSound()) {
-			soundIcon.setImageResource(R.drawable.no_sound);
+		if(this.game.haveSound()) { //  if does not want sound
+			soundIcon.setImageResource(R.drawable.no_sound);    //  display no sound icon
 		}
 		else {
-			soundIcon.setImageResource(R.drawable.sound);
+			soundIcon.setImageResource(R.drawable.sound);   //  otherwise print sound icon
 		}
 
-		this.game.setSound(!this.game.haveSound());
+		this.game.setSound(!this.game.haveSound()); //  to sound or not to sound
 	}
 }

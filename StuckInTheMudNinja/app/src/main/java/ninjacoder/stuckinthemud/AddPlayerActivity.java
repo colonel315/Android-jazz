@@ -14,8 +14,8 @@ import java.io.Serializable;
 
 
 public class AddPlayerActivity extends ActionBarActivity {
-	private Game game;
-	private MediaPlayer bloopSound;
+	private Game game;  //  stores the game instance
+	private MediaPlayer bloopSound; //  stores the sound
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,21 +23,21 @@ public class AddPlayerActivity extends ActionBarActivity {
 
 		setContentView(R.layout.activity_add_player);
 
-		this.getSupportActionBar().hide();
+		this.getSupportActionBar().hide();  //  hide the action bar
 
-		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound);
+		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound);  //  create the bloop sound
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 
-		Bundle bundle = getIntent().getExtras();
+		Bundle bundle = getIntent().getExtras();    //  get the extras and put it in the bundle
 
-		Serializable gameContent = bundle.getSerializable("game");
+		Serializable gameContent = bundle.getSerializable("game");  //  get the serializable data from the bundle
 
-		if(gameContent != null) {
-			this.game = (Game) gameContent;
+		if(gameContent != null) {   //  check if it is null
+			this.game = (Game) gameContent; //  store the instance inside of the current game instance
 		}
 	}
 
@@ -45,10 +45,10 @@ public class AddPlayerActivity extends ActionBarActivity {
 	public void onResume() {
 		super.onResume();
 
-		Serializable gameContent = getIntent().getSerializableExtra("game");
+		Serializable gameContent = getIntent().getSerializableExtra("game");    //  get the serializable content
 
-		if(gameContent != null) {
-			this.game = (Game) gameContent;
+		if(gameContent != null) {   //  check if null
+			this.game = (Game) gameContent; //  store the instance inside of the current game instance
 		}
 	}
 
@@ -74,14 +74,23 @@ public class AddPlayerActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * clears out any player's the game instance may have and resets the round to 1.
+	 * @param view
+	 */
 	public void clearPlayers(View view) {
 		if(this.game.haveSound()) {
 			this.bloopSound.start();
 		}
 
 		this.game.getPlayerList().clear();
+		this.game.setRound(1);
 	}
 
+	/**
+	 * add's a new player to the game instance, otherwise displays a text to the user.
+	 * @param view
+	 */
 	public void addNewPlayer(View view) {
 		EditText newPlayer = (EditText)findViewById(R.id.newPlayer);
 
@@ -99,6 +108,10 @@ public class AddPlayerActivity extends ActionBarActivity {
 		}
 	}
 
+	/**
+	 * User changed their mind and going to MainActivity
+	 * @param view
+	 */
 	public void cancel(View view) {
 		if(this.game.haveSound()) {
 			this.bloopSound.start();
@@ -107,6 +120,9 @@ public class AddPlayerActivity extends ActionBarActivity {
 		this.goToMainActivity();
 	}
 
+	/**
+	 * puts the current instance of game into the intent and then starts the main activity
+	 */
 	public void goToMainActivity() {
 		if(this.game.haveSound()) {
 			this.bloopSound.start();
