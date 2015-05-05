@@ -39,7 +39,7 @@ public class PlayGameActivity extends ActionBarActivity implements Serializable 
 		//  initialize these variables
 		this.diceView = new ImageView[5];
 		this.playerName = (TextView)findViewById(R.id.playerName);
-		this.round = (TextView)findViewById(R.id.rotation);
+		this.round = (TextView)findViewById(R.id.round);
 		this.score = (TextView)findViewById(R.id.score);
 		this.highestScoring = (TextView)findViewById(R.id.highestPlayer);
 		this.bloopSound = MediaPlayer.create(this, R.raw.bloop_sound);
